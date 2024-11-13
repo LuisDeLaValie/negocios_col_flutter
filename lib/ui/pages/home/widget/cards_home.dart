@@ -33,8 +33,8 @@ class ListCardsHome extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              ...items.map((item) => SizedBox(width: 185, height: 100
-              , child: CardsHome(item: item))),
+              ...items.map((item) => SizedBox(
+                  width: 185, height: 100, child: CardsHome(item: item))),
               // ...List.generate(items.length, (index) => SizedBox(height: 10)),
             ],
           ),
@@ -56,10 +56,18 @@ class CardsHome extends StatelessWidget {
     return Card(
       child: Stack(
         children: [
-          Container(
-            color: Colors.grey,
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Image.network(item.path, fit: BoxFit.fill),
           ),
-          Text(item.titulo)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 2),
+            decoration: BoxDecoration(color: Colors.white.withOpacity(0.5),borderRadius: BorderRadius.circular(8)),
+            child: Text(item.titulo),
+          ),
         ],
       ),
     );
