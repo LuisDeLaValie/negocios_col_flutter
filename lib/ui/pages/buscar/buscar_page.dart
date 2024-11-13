@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:negocios_col_flutter/models/busqueda_model.dart';
+import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
 
 class BuscarPage extends StatefulWidget {
   const BuscarPage({super.key});
@@ -10,6 +12,8 @@ class BuscarPage extends StatefulWidget {
 }
 
 class _BuscarPageState extends State<BuscarPage> {
+  List<BuscarModel> resultados = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,13 +29,25 @@ class _BuscarPageState extends State<BuscarPage> {
         ),
       ),
       body: ListView.separated(
-          itemBuilder: (context, index) => const ListTile(
-                title: Text("Titulo"),
-                subtitle: Text("Subtitulo"),
-                leading: Icon(Icons.abc),
-              ),
+          itemBuilder: (context, index) {
+            final data = resultados[index];
+
+            if (data.id_Producto != null || data.id_servicio != null) {
+              return ListTile(
+                title: Text(data.nombre),
+                subtitle: Text(data.descripsion),
+                leading: Image.network(data.imagen),
+              );
+            }
+
+            return ListTile(
+              title: Text(data.nombre),
+              subtitle: Text(data.descripsion),
+              leading: Image.network(data.imagen),
+            );
+          },
           separatorBuilder: (context, index) => Divider(),
-          itemCount: 10),
+          itemCount: resultados.length),
     );
   }
 
@@ -44,9 +60,16 @@ class _BuscarPageState extends State<BuscarPage> {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
 
     // Configurar el nuevo debounce
-    _debounce = Timer(debounceDuration, () {
+    _debounce = Timer(debounceDuration, () async {
       // Aquí va la lógica que se ejecutará después del tiempo de debounce
-      print("Texto ingresado: $query");
+      final data = await NegociosColApi().buscar(query);
+
+      if (data == null) {
+        resultados = [];
+      }
+
+      resultados = data!;
+      setState(() {}); // Actualizar la lista de resultados en el widget Flutter
     });
   }
 }
