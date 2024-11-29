@@ -72,4 +72,21 @@ class NegociosColApi {
       client.close();
     }
   }
+
+  Future<NegocioModel?> getNegocio(int negocio) async {
+    final client = http.Client();
+    try {
+      var response = await client.get(Uri.parse("$api/api/negocios/$negocio"));
+      var data = jsonDecode(response.body);
+      if (data == null) {
+        return null;
+      }
+      return NegocioModel.fromMap(data as dynamic);
+    } catch (e) {
+      print('Error: $e');
+      rethrow;
+    } finally {
+      client.close();
+    }
+  }
 }

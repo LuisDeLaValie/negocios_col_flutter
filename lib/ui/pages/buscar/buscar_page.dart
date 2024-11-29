@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:negocios_col_flutter/models/busqueda_model.dart';
 import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
 
+import '../negocios/negocio_page.dart';
+
 class BuscarPage extends StatefulWidget {
   const BuscarPage({super.key});
 
@@ -44,6 +46,16 @@ class _BuscarPageState extends State<BuscarPage> {
               title: Text(data.nombre),
               subtitle: Text(data.descripsion),
               leading: Image.network(data.imagen),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => NegocioPage(
+                      idNegocio: data.id_Negocio,
+                    ),
+                  ),
+                );
+              },
             );
           },
           separatorBuilder: (context, index) => Divider(),
