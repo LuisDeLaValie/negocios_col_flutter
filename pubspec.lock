@@ -192,6 +192,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  tdtxle_data_format:
+    dependency: "direct main"
+    description:
+      name: tdtxle_data_format
+      sha256: "4653a946b3ac003005436504ebd8fee09d3501ff9112ab0e12b15fb12997b882"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   term_glyph:
     dependency: transitive
     description:

@@ -89,4 +89,43 @@ class NegociosColApi {
       client.close();
     }
   }
+
+  Future<List<ServicioModel>?> getServicioNegocio(int negocio) async {
+    final client = http.Client();
+    try {
+      var response =
+          await client.get(Uri.parse("$api/api/negocios/servisios/$negocio"));
+      var data = jsonDecode(response.body);
+      if (data == null) return null;
+
+      var dataValue = jsonDecode(response.body) as List<dynamic>;
+      return List.generate(
+          dataValue.length, (index) => ServicioModel.fromMap(data[index]));
+    } catch (e) {
+      print('Error: $e');
+      rethrow;
+    } finally {
+      client.close();
+    }
+  }
+
+
+  Future<List<ProductoModel>?> getProductosNegocio(int negocio) async {
+    final client = http.Client();
+    try {
+      var response =
+          await client.get(Uri.parse("$api/api/negocios/productos/$negocio"));
+      var data = jsonDecode(response.body);
+      if (data == null) return null;
+
+      var dataValue = jsonDecode(response.body) as List<dynamic>;
+      return List.generate(
+          dataValue.length, (index) => ProductoModel.fromMap(data[index]));
+    } catch (e) {
+      print('Error: $e');
+      rethrow;
+    } finally {
+      client.close();
+    }
+  }
 }

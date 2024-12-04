@@ -1,14 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:negocios_col_flutter/models/negocios.dart';
+import 'package:negocios_col_flutter/models/producto_model.dart';
+import 'package:negocios_col_flutter/models/servicio_model.dart';
 import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
+import 'package:negocios_col_flutter/ui/pages/negocios/widget/lista_productos.dart';
+
+import 'widget/header_negocios.dart';
 
 class NegocioPage extends StatefulWidget {
   final int idNegocio;
   const NegocioPage({
-    Key? key,
+    super.key,
     required this.idNegocio,
-  }) : super(key: key);
+  });
 
   @override
   State<NegocioPage> createState() => _NegocioPageState();
@@ -16,18 +21,24 @@ class NegocioPage extends StatefulWidget {
 
 class _NegocioPageState extends State<NegocioPage> {
   NegocioModel? negocio;
+  List<ServicioModel>? servicios;
+  List<ProductoModel>? productos;
 
   @override
   void initState() {
-    NegociosColApi().getNegocio(widget.idNegocio).then(
-      (value) {
-        setState(() {
-          negocio = value!;
-        });
-      },
-    );
+    getData();
 
     super.initState();
+  }
+
+  Future<void> getData() async {
+    negocio = await NegociosColApi().getNegocio(widget.idNegocio);
+
+    servicios = await NegociosColApi().getServicioNegocio(widget.idNegocio);
+
+    productos = await NegociosColApi().getProductosNegocio(widget.idNegocio);
+
+    setState(() {});
   }
 
   @override
@@ -35,56 +46,42 @@ class _NegocioPageState extends State<NegocioPage> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [HeaderNegocio(negocio: negocio)],
+          children: [
+            HeaderNegocio(negocio: negocio),
+            if (productos != null && servicios != null)
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Productos",
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Servicios",
+                    ),
+                  ),
+                ],
+              ),
+            if (productos != null)
+              Expanded(
+                child: ListaProductos(
+                  productos: productos!
+                      .map(
+                        (e) => ItemProducto(
+                            titulo: e.nombre,
+                            detalle: e.descripsion,
+                            precio: 25.4,
+                            imagen: e.imagen),
+                      )
+                      .toList(),
+                ),
+              ),
+          ],
         ),
       ),
-    );
-  }
-}
-
-class HeaderNegocio extends StatelessWidget {
-  const HeaderNegocio({
-    super.key,
-    required this.negocio,
-  });
-
-  final NegocioModel? negocio;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          height: double.infinity,
-          constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.3),
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            image: negocio != null
-                ? DecorationImage(
-                    image: NetworkImage(negocio!.Imagen),
-                    fit: BoxFit.fill,
-                  )
-                : null,
-          ),
-        ),
-        Positioned(
-          bottom: 5,
-          left: 5,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.3),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              negocio?.Nombre ?? "",
-              style: const TextStyle(fontSize: 25),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
