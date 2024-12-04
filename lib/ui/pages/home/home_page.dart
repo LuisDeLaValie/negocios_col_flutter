@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:negocios_col_flutter/models/negocios.dart';
 import 'package:negocios_col_flutter/models/producto_model.dart';
@@ -6,6 +7,7 @@ import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
 import 'package:negocios_col_flutter/ui/pages/buscar/buscar_page.dart';
 import 'package:negocios_col_flutter/ui/pages/home/widget/cards_home.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -50,11 +52,7 @@ class _HomePageState extends State<HomePage> {
                     OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
               ),
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const BuscarPage(),
-                  ),
-                );
+                context.router.pushNamed('/buscar');
               },
             ),
             SizedBox(height: 45),

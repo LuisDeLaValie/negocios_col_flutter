@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:negocios_col_flutter/models/busqueda_model.dart';
 import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
 
 import '../negocios/negocio_page.dart';
 
+@RoutePage()
 class BuscarPage extends StatefulWidget {
   const BuscarPage({super.key});
 
@@ -39,6 +41,9 @@ class _BuscarPageState extends State<BuscarPage> {
                 title: Text(data.nombre),
                 subtitle: Text(data.descripsion),
                 leading: Image.network(data.imagen),
+                onTap: () {
+                  context.router.pushNamed('/negocio/${data.id_Negocio}');
+                },
               );
             }
 
@@ -47,14 +52,7 @@ class _BuscarPageState extends State<BuscarPage> {
               subtitle: Text(data.descripsion),
               leading: Image.network(data.imagen),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => NegocioPage(
-                      idNegocio: data.id_Negocio,
-                    ),
-                  ),
-                );
+                context.router.pushNamed('/negocio/${data.id_Negocio}');
               },
             );
           },

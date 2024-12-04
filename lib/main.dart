@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:negocios_col_flutter/ui/pages/home/home_page.dart';
 
-void main() => runApp(const MyApp());
+import 'services/router/router.dart';
+
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
       title: 'Material App',
-      home: HomePage(),
+      routerConfig: _appRouter.config(),
     );
   }
 }
