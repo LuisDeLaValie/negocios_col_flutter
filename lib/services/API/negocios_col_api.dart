@@ -109,7 +109,6 @@ class NegociosColApi {
     }
   }
 
-
   Future<List<ProductoModel>?> getProductosNegocio(int negocio) async {
     final client = http.Client();
     try {
@@ -121,6 +120,34 @@ class NegociosColApi {
       var dataValue = jsonDecode(response.body) as List<dynamic>;
       return List.generate(
           dataValue.length, (index) => ProductoModel.fromMap(data[index]));
+    } catch (e) {
+      print('Error: $e');
+      rethrow;
+    } finally {
+      client.close();
+    }
+  }
+
+  Future<ProductoModel> getProducto(int id) async {
+    final client = http.Client();
+    try {
+      var response = await client.get(Uri.parse("$api/api/productos/$id"));
+      var data = jsonDecode(response.body) as Map<String, dynamic>;
+      return ProductoModel.fromMap(data);
+    } catch (e) {
+      print('Error: $e');
+      rethrow;
+    } finally {
+      client.close();
+    }
+  }
+
+  Future<ServicioModel> getServicio(int id) async {
+    final client = http.Client();
+    try {
+      var response = await client.get(Uri.parse("$api/api/servicios/$id"));
+      var data = jsonDecode(response.body) as Map<String, dynamic>;
+      return ServicioModel.fromMap(data);
     } catch (e) {
       print('Error: $e');
       rethrow;

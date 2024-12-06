@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:negocios_col_flutter/models/negocios.dart';
+import 'package:auto_route/auto_route.dart';
 
 class HeaderNegocio extends StatelessWidget {
   const HeaderNegocio({
@@ -14,7 +14,7 @@ class HeaderNegocio extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-         Container(
+        Container(
           width: double.infinity,
           height: double.infinity,
           constraints: BoxConstraints(
@@ -50,10 +50,24 @@ class HeaderNegocio extends StatelessWidget {
           child: BackButton(
             color: Colors.white,
             onPressed: () {
-              Navigator.pop(context);
+              context.router.back();
+              // Navigator.of(context).pop();
             },
           ),
         ),
+        Positioned(
+            top: 10,
+            right: 10,
+            child: ElevatedButton.icon(
+              onPressed: () {},
+              label: const Text("Me intereza"),
+              icon: const Icon(Icons.star),
+            )
+            // IconButton(
+            //   onPressed: () {},
+            //   icon: const Icon(Icons.star),
+            // ),
+            )
       ],
     );
   }

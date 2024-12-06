@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:negocios_col_flutter/models/negocios.dart';
 import 'package:negocios_col_flutter/models/producto_model.dart';
-import 'package:negocios_col_flutter/models/servicio_model.dart';
 import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../widget/header_negocios.dart';
 
@@ -23,8 +23,7 @@ class ProductoPage extends StatefulWidget {
 
 class _ProductoPageState extends State<ProductoPage> {
   NegocioModel? negocio;
-  List<ServicioModel>? servicios;
-  List<ProductoModel>? productos;
+  ProductoModel? producto;
 
   @override
   void initState() {
@@ -36,7 +35,7 @@ class _ProductoPageState extends State<ProductoPage> {
   Future<void> getData() async {
     negocio = await NegociosColApi().getNegocio(widget.idNegocio);
 
-    productos = await NegociosColApi().getProductosNegocio(widget.idNegocio);
+    producto = await NegociosColApi().getProducto(widget.idPS!);
 
     setState(() {});
   }
@@ -45,11 +44,51 @@ class _ProductoPageState extends State<ProductoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        children: [
-          HeaderNegocio(negocio: negocio),
-        ],
-      )),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HeaderNegocio(negocio: negocio),
+            SizedBox(height: 10),
+            Text(
+              producto?.nombre ?? "",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                if (producto != null)
+                  Image.network(
+                    producto?.imagen ?? "",
+                    width: 150,
+                    height: 150,
+                    fit: BoxFit.contain,
+                  ),
+                if (producto == null)
+                  const Icon(
+                    Icons.photo,
+                    size: 150,
+                    color: Colors.grey,
+                  ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    producto?.descripsion ?? "",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          final Uri tel = Uri(scheme: 'tel', path: negocio!.Telefono);
+          launchUrl(tel);
+        },
+        label: const Text("Contactar"),
+        icon: const Icon(Icons.phone),
+      ),
     );
   }
 }

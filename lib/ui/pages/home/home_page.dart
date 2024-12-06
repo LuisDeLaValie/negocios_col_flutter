@@ -61,7 +61,8 @@ class _HomePageState extends State<HomePage> {
                 items: ultimosProductos
                     .map((e) => ItemCardHome(
                         titulo: e.nombre,
-                        path: '/negocio/${e.id_Negocio}/producto/${e.id_Producto}',
+                        path:
+                            '/negocio/${e.id_Negocio}/producto/${e.id_Producto}',
                         // path: '/negocio/${e.id_Negocio}/producto/${e.id_Producto}',
                         imagen: e.imagen))
                     .toList(),
@@ -78,10 +79,6 @@ class _HomePageState extends State<HomePage> {
                           path: '/negocio/${e.Id_Negocio}',
                         ))
                     .toList(),
-                // items: List.generate(
-                //   10,
-                //   (index) => ItemCardHome(titulo: "dato $index", imagen: "path"),, path: "",
-                // ),
                 tituloLista: "Nuevos negocios",
               ),
             ),
@@ -92,7 +89,8 @@ class _HomePageState extends State<HomePage> {
                     .map((e) => ItemCardHome(
                           titulo: e.nombre,
                           imagen: e.imagen,
-                          path: '/negocio/${e.id_Negocio}/servicio/${e.id_servicio}',
+                          path:
+                              '/negocio/${e.id_Negocio}/servicio/${e.id_servicio}',
                         ))
                     .toList(),
                 tituloLista: "Recomendados",
