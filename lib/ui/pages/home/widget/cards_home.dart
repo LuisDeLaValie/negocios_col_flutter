@@ -1,13 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:negocios_col_flutter/ui/pages/home/home_page.dart';
 
 class ItemCardHome {
   final String titulo;
-  final String? imagen;
+  final String imagen;
   final String path;
   ItemCardHome({
     required this.titulo,
-    this.imagen,
+    required this.imagen,
     required this.path,
   });
 }
@@ -53,22 +55,29 @@ class CardsHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Image.network(item.path, fit: BoxFit.fill),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 2),
-            decoration: BoxDecoration(color: Colors.white.withOpacity(0.5),borderRadius: BorderRadius.circular(8)),
-            child: Text(item.titulo),
-          ),
-        ],
+    return InkWell(
+      onTap: () {
+        context.router.pushNamed(item.path);
+      },
+      child: Card(
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Image.network(item.imagen, fit: BoxFit.fill),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(8)),
+              child: Text(item.titulo),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -27,7 +27,7 @@ class NegociosColApi {
   Future<List<ProductoModel>> getLastProducto() async {
     final client = http.Client();
     try {
-      var response = await client.get(Uri.parse("$api/api/producto/lasts"));
+      var response = await client.get(Uri.parse("$api/api/productos/lasts"));
       var data = jsonDecode(response.body) as List<dynamic>;
       return List.generate(
           data.length, (index) => ProductoModel.fromMap(data[index]));

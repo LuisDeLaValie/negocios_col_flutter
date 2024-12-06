@@ -1,7 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class ProductoModel {
   final int id_Producto;
+  final int id_Negocio;
   final String nombre;
   final String descripsion;
   final String imagen;
@@ -10,6 +12,7 @@ class ProductoModel {
   final String actualizado;
   ProductoModel({
     required this.id_Producto,
+    required this.id_Negocio,
     required this.nombre,
     required this.descripsion,
     required this.imagen,
@@ -20,6 +23,7 @@ class ProductoModel {
 
   ProductoModel copyWith({
     int? id_Producto,
+    int? id_Negocio,
     String? nombre,
     String? descripsion,
     String? imagen,
@@ -29,6 +33,7 @@ class ProductoModel {
   }) {
     return ProductoModel(
       id_Producto: id_Producto ?? this.id_Producto,
+      id_Negocio: id_Negocio ?? this.id_Negocio,
       nombre: nombre ?? this.nombre,
       descripsion: descripsion ?? this.descripsion,
       imagen: imagen ?? this.imagen,
@@ -41,6 +46,7 @@ class ProductoModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id_Producto': id_Producto,
+      'id_Negocio': id_Negocio,
       'nombre': nombre,
       'descripsion': descripsion,
       'imagen': imagen,
@@ -52,11 +58,12 @@ class ProductoModel {
 
   factory ProductoModel.fromMap(Map<String, dynamic> map) {
     return ProductoModel(
-      id_Producto: map['id_Producto'].toInt() as int,
+      id_Producto: map['id_Producto'] as int,
+      id_Negocio: map['id_Negocio'] as int,
       nombre: map['nombre'] as String,
       descripsion: map['descripsion'] as String,
       imagen: map['imagen'] as String,
-      unidad: map['unidad'].toInt() as int,
+      unidad: map['unidad'] as int,
       creado: map['creado'] as String,
       actualizado: map['actualizado'] as String,
     );
@@ -68,7 +75,7 @@ class ProductoModel {
 
   @override
   String toString() {
-    return 'ProductoModel(id_Producto: $id_Producto, nombre: $nombre, descripsion: $descripsion, imagen: $imagen, unidad: $unidad, creado: $creado, actualizado: $actualizado)';
+    return 'ProductoModel(id_Producto: $id_Producto, id_Negocio: $id_Negocio, nombre: $nombre, descripsion: $descripsion, imagen: $imagen, unidad: $unidad, creado: $creado, actualizado: $actualizado)';
   }
 
   @override
@@ -77,6 +84,7 @@ class ProductoModel {
   
     return 
       other.id_Producto == id_Producto &&
+      other.id_Negocio == id_Negocio &&
       other.nombre == nombre &&
       other.descripsion == descripsion &&
       other.imagen == imagen &&
@@ -88,6 +96,7 @@ class ProductoModel {
   @override
   int get hashCode {
     return id_Producto.hashCode ^
+      id_Negocio.hashCode ^
       nombre.hashCode ^
       descripsion.hashCode ^
       imagen.hashCode ^
@@ -95,4 +104,4 @@ class ProductoModel {
       creado.hashCode ^
       actualizado.hashCode;
   }
-}
+  }

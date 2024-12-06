@@ -27,8 +27,7 @@ class ListaProductos extends StatelessWidget {
                 final currentPath = context.router.currentPath;
                 print('currentPath: $currentPath');
 
-                // context.router.pushNamed('$currentPath/producto/${e.id}');
-                context.router.navigate(ProductoRoute(idPS: e.id));
+                context.router.pushNamed('$currentPath/producto/${e.id}');
               },
             ),
           )

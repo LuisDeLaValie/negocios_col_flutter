@@ -15,20 +15,24 @@ class AppRouter extends RootStackRouter {
           path: '/buscar',
         ),
         AutoRoute(
-          page: NegocioRoute.page,
-          path: '/negocio/:negocio',
-          children: [
-            AutoRoute(
-              page: ProductoRoute.page,
-              path: 'producto/:id',
-            ),
-            AutoRoute(
-              page: ServicioRoute.page,
-              path: 'servicio/:id',
-            ),
-            // Add more child routes for NegocioRoute as needed
-          ],
-        ),
+            page: NegocioRouteNavigation.page,
+            path: '/negocio/:negocio',
+            children: [
+              AutoRoute(
+                initial: true,
+                page: NegocioRoute.page,
+                path: '',
+              ),
+              AutoRoute(
+                page: ServicioRoute.page,
+                path: 'servicio/:id',
+              ),
+              AutoRoute(
+                page: ProductoRoute.page,
+                path: 'producto/:id',
+              ),
+            ]),
+
         // Add more routes as needed
       ];
 }

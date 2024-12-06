@@ -4,7 +4,6 @@ import 'package:negocios_col_flutter/models/negocios.dart';
 import 'package:negocios_col_flutter/models/producto_model.dart';
 import 'package:negocios_col_flutter/models/servicio_model.dart';
 import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
-import 'package:negocios_col_flutter/ui/pages/buscar/buscar_page.dart';
 import 'package:negocios_col_flutter/ui/pages/home/widget/cards_home.dart';
 
 @RoutePage()
@@ -60,7 +59,11 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(8.0),
               child: ListCardsHome(
                 items: ultimosProductos
-                    .map((e) => ItemCardHome(titulo: e.nombre, path: e.imagen))
+                    .map((e) => ItemCardHome(
+                        titulo: e.nombre,
+                        path: '/negocio/${e.id_Negocio}/producto/${e.id_Producto}',
+                        // path: '/negocio/${e.id_Negocio}/producto/${e.id_Producto}',
+                        imagen: e.imagen))
                     .toList(),
                 tituloLista: "Mas Buscados",
               ),
@@ -69,11 +72,15 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(8.0),
               child: ListCardsHome(
                 items: ultimosNegocios
-                    .map((e) => ItemCardHome(titulo: e.Nombre, path: e.Imagen))
+                    .map((e) => ItemCardHome(
+                          titulo: e.Nombre,
+                          imagen: e.Imagen,
+                          path: '/negocio/${e.Id_Negocio}',
+                        ))
                     .toList(),
                 // items: List.generate(
                 //   10,
-                //   (index) => ItemCardHome(titulo: "dato $index", path: "path"),
+                //   (index) => ItemCardHome(titulo: "dato $index", imagen: "path"),, path: "",
                 // ),
                 tituloLista: "Nuevos negocios",
               ),
@@ -82,7 +89,11 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(8.0),
               child: ListCardsHome(
                 items: ultimosServicios
-                    .map((e) => ItemCardHome(titulo: e.nombre, path: e.imagen))
+                    .map((e) => ItemCardHome(
+                          titulo: e.nombre,
+                          imagen: e.imagen,
+                          path: '/negocio/${e.id_Negocio}/servicio/${e.id_servicio}',
+                        ))
                     .toList(),
                 tituloLista: "Recomendados",
               ),

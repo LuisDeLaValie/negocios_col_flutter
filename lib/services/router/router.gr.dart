@@ -8,21 +8,23 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:flutter/material.dart' as _i7;
+import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
 import 'package:negocios_col_flutter/ui/pages/buscar/buscar_page.dart' as _i1;
 import 'package:negocios_col_flutter/ui/pages/home/home_page.dart' as _i2;
 import 'package:negocios_col_flutter/ui/pages/negocios/negocio_page.dart'
     as _i3;
-import 'package:negocios_col_flutter/ui/pages/negocios/producto/producto_page.dart'
+import 'package:negocios_col_flutter/ui/pages/negocios/negocio_page_navigation.dart'
     as _i4;
-import 'package:negocios_col_flutter/ui/pages/negocios/servicio/servicio_page.dart'
+import 'package:negocios_col_flutter/ui/pages/negocios/producto/producto_page.dart'
     as _i5;
+import 'package:negocios_col_flutter/ui/pages/negocios/servicio/servicio_page.dart'
+    as _i6;
 
 /// generated route for
 /// [_i1.BuscarPage]
-class BuscarRoute extends _i6.PageRouteInfo<void> {
-  const BuscarRoute({List<_i6.PageRouteInfo>? children})
+class BuscarRoute extends _i7.PageRouteInfo<void> {
+  const BuscarRoute({List<_i7.PageRouteInfo>? children})
       : super(
           BuscarRoute.name,
           initialChildren: children,
@@ -30,7 +32,7 @@ class BuscarRoute extends _i6.PageRouteInfo<void> {
 
   static const String name = 'BuscarRoute';
 
-  static _i6.PageInfo page = _i6.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       return const _i1.BuscarPage();
@@ -40,8 +42,8 @@ class BuscarRoute extends _i6.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomePage]
-class HomeRoute extends _i6.PageRouteInfo<void> {
-  const HomeRoute({List<_i6.PageRouteInfo>? children})
+class HomeRoute extends _i7.PageRouteInfo<void> {
+  const HomeRoute({List<_i7.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -49,7 +51,7 @@ class HomeRoute extends _i6.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static _i6.PageInfo page = _i6.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       return const _i2.HomePage();
@@ -59,11 +61,11 @@ class HomeRoute extends _i6.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.NegocioPage]
-class NegocioRoute extends _i6.PageRouteInfo<NegocioRouteArgs> {
+class NegocioRoute extends _i7.PageRouteInfo<NegocioRouteArgs> {
   NegocioRoute({
-    _i7.Key? key,
+    _i8.Key? key,
     required int idNegocio,
-    List<_i6.PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           NegocioRoute.name,
           args: NegocioRouteArgs(
@@ -76,7 +78,7 @@ class NegocioRoute extends _i6.PageRouteInfo<NegocioRouteArgs> {
 
   static const String name = 'NegocioRoute';
 
-  static _i6.PageInfo page = _i6.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
@@ -97,7 +99,7 @@ class NegocioRouteArgs {
     required this.idNegocio,
   });
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   final int idNegocio;
 
@@ -108,12 +110,31 @@ class NegocioRouteArgs {
 }
 
 /// generated route for
-/// [_i4.ProductoPage]
-class ProductoRoute extends _i6.PageRouteInfo<ProductoRouteArgs> {
+/// [_i4.NegocioPageNavigation]
+class NegocioRouteNavigation extends _i7.PageRouteInfo<void> {
+  const NegocioRouteNavigation({List<_i7.PageRouteInfo>? children})
+      : super(
+          NegocioRouteNavigation.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NegocioRouteNavigation';
+
+  static _i7.PageInfo page = _i7.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.NegocioPageNavigation();
+    },
+  );
+}
+
+/// generated route for
+/// [_i5.ProductoPage]
+class ProductoRoute extends _i7.PageRouteInfo<ProductoRouteArgs> {
   ProductoRoute({
-    _i7.Key? key,
+    _i8.Key? key,
     required int? idPS,
-    List<_i6.PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           ProductoRoute.name,
           args: ProductoRouteArgs(
@@ -126,13 +147,13 @@ class ProductoRoute extends _i6.PageRouteInfo<ProductoRouteArgs> {
 
   static const String name = 'ProductoRoute';
 
-  static _i6.PageInfo page = _i6.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<ProductoRouteArgs>(
           orElse: () => ProductoRouteArgs(idPS: pathParams.optInt('id')));
-      return _i4.ProductoPage(
+      return _i5.ProductoPage(
         key: args.key,
         idNegocio: pathParams.getInt('negocio'),
         idPS: args.idPS,
@@ -147,7 +168,7 @@ class ProductoRouteArgs {
     required this.idPS,
   });
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   final int? idPS;
 
@@ -158,13 +179,13 @@ class ProductoRouteArgs {
 }
 
 /// generated route for
-/// [_i5.ServicioPage]
-class ServicioRoute extends _i6.PageRouteInfo<ServicioRouteArgs> {
+/// [_i6.ServicioPage]
+class ServicioRoute extends _i7.PageRouteInfo<ServicioRouteArgs> {
   ServicioRoute({
-    _i7.Key? key,
+    _i8.Key? key,
     required int? idPS,
     int? idProducto,
-    List<_i6.PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           ServicioRoute.name,
           args: ServicioRouteArgs(
@@ -178,13 +199,13 @@ class ServicioRoute extends _i6.PageRouteInfo<ServicioRouteArgs> {
 
   static const String name = 'ServicioRoute';
 
-  static _i6.PageInfo page = _i6.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<ServicioRouteArgs>(
           orElse: () => ServicioRouteArgs(idPS: pathParams.optInt('id')));
-      return _i5.ServicioPage(
+      return _i6.ServicioPage(
         key: args.key,
         idNegocio: pathParams.getInt('negocio'),
         idPS: args.idPS,
@@ -201,7 +222,7 @@ class ServicioRouteArgs {
     this.idProducto,
   });
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   final int? idPS;
 
