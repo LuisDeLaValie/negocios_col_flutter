@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'services/router/router.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  await Hive.initFlutter();
+  var box = await Hive.openBox('Sesion');
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});

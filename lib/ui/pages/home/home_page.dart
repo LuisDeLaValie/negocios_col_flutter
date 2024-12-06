@@ -5,6 +5,7 @@ import 'package:negocios_col_flutter/models/producto_model.dart';
 import 'package:negocios_col_flutter/models/servicio_model.dart';
 import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
 import 'package:negocios_col_flutter/ui/pages/home/widget/cards_home.dart';
+import 'package:negocios_col_flutter/ui/widgets/custom_drawer.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -36,10 +37,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-        elevation: 10,
-      ),
+      endDrawer: const CustomDrawer(),
+      appBar: AppBar(elevation: 10),
       body: SafeArea(
         child: Column(
           children: [
