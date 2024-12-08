@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:negocios_col_flutter/models/negocios.dart';
-import 'package:negocios_col_flutter/models/producto_model.dart';
 import 'package:negocios_col_flutter/models/servicio_model.dart';
 import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
 

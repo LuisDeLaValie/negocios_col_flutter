@@ -23,7 +23,7 @@ class HeaderNegocio extends StatelessWidget {
             color: Colors.grey,
             image: negocio != null
                 ? DecorationImage(
-                    image: NetworkImage(negocio!.Imagen),
+                    image: NetworkImage(negocio!.imagen ?? ""),
                     fit: BoxFit.fill,
                   )
                 : null,
@@ -39,7 +39,7 @@ class HeaderNegocio extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              negocio?.Nombre ?? "",
+              negocio?.nombre ?? "",
               style: const TextStyle(fontSize: 25),
             ),
           ),

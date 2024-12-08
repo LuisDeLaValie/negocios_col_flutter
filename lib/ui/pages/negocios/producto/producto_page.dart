@@ -83,7 +83,7 @@ class _ProductoPageState extends State<ProductoPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          final Uri tel = Uri(scheme: 'tel', path: negocio!.Telefono);
+          final Uri tel = Uri(scheme: 'tel', path: negocio!.telefono);
           launchUrl(tel);
         },
         label: const Text("Contactar"),

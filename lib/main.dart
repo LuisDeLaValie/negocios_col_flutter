@@ -5,7 +5,7 @@ import 'services/router/router.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
-  var box = await Hive.openBox('Sesion');
+  await Hive.openBox('Sesion');
 
   runApp(MyApp());
 }

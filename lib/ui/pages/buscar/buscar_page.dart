@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:negocios_col_flutter/models/busqueda_model.dart';
 import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
 
-import '../negocios/negocio_page.dart';
 
 @RoutePage()
 class BuscarPage extends StatefulWidget {

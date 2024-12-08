@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:negocios_col_flutter/services/router/guard.dart';
 import 'package:negocios_col_flutter/services/router/router.gr.dart';
 
 @AutoRouterConfig()
@@ -13,6 +14,21 @@ class AppRouter extends RootStackRouter {
         AutoRoute(
           page: BuscarRoute.page,
           path: '/buscar',
+        ),
+        AutoRoute(
+          page: EditarNegocioRoute.page,
+          path: '/editar/negocio/:negocio',
+          guards: [AuthGuard()],
+        ),
+       
+        AutoRoute(
+          page: CrearNegocioRoute.page,
+          path: '/crear/negocio',
+        ),
+       
+        AutoRoute(
+          page: LoginNegocio.page,
+          path: '/negocio/login',
         ),
         AutoRoute(
           page: NegocioRouteNavigation.page,

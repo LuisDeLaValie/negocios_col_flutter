@@ -1,112 +1,119 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class NegocioModel {
-  final int Id_Negocio;
-  final String Nombre;
-  final String Descripsion;
-  final String Direccion;
-  final String Telefono;
-  final String Correo;
-  final String Imagen;
-  final double Latitude;
-  final double Longitude;
-  final String Facebook;
-  final String Twitter;
-  final String Instagram;
-  final String Website;
-  final String Creado;
-  final String Actualizado;
+  final int? id_Negocio;
+  final String nombre;
+  final String? password;
+  final String descripcion;
+  final String direccion;
+  final String telefono;
+  final String correo;
+  final String? imagen;
+  final double latitude;
+  final double longitude;
+  final String? facebook;
+  final String? twitter;
+  final String? instagram;
+  final String? website;
+  final DateTime? creado;
+  final DateTime? actualizado;
   NegocioModel({
-    required this.Id_Negocio,
-    required this.Nombre,
-    required this.Descripsion,
-    required this.Direccion,
-    required this.Telefono,
-    required this.Correo,
-    required this.Imagen,
-    required this.Latitude,
-    required this.Longitude,
-    required this.Facebook,
-    required this.Twitter,
-    required this.Instagram,
-    required this.Website,
-    required this.Creado,
-    required this.Actualizado,
+    this.id_Negocio,
+    required this.nombre,
+    this.password,
+    required this.descripcion,
+    required this.direccion,
+    required this.telefono,
+    required this.correo,
+    this.imagen,
+    required this.latitude,
+    required this.longitude,
+    this.facebook,
+    this.twitter,
+    this.instagram,
+    this.website,
+    this.creado,
+    this.actualizado,
   });
 
   NegocioModel copyWith({
-    int? Id_Negocio,
-    String? Nombre,
-    String? Descripsion,
-    String? Direccion,
-    String? Telefono,
-    String? Correo,
-    String? Imagen,
-    double? Latitude,
-    double? Longitude,
-    String? Facebook,
-    String? Twitter,
-    String? Instagram,
-    String? Website,
-    String? Creado,
-    String? Actualizado,
+    int? id_Negocio,
+    String? nombre,
+    String? password,
+    String? descripcion,
+    String? direccion,
+    String? telefono,
+    String? correo,
+    String? imagen,
+    double? latitude,
+    double? longitude,
+    String? facebook,
+    String? twitter,
+    String? instagram,
+    String? website,
+    DateTime? creado,
+    DateTime? actualizado,
   }) {
     return NegocioModel(
-      Id_Negocio: Id_Negocio ?? this.Id_Negocio,
-      Nombre: Nombre ?? this.Nombre,
-      Descripsion: Descripsion ?? this.Descripsion,
-      Direccion: Direccion ?? this.Direccion,
-      Telefono: Telefono ?? this.Telefono,
-      Correo: Correo ?? this.Correo,
-      Imagen: Imagen ?? this.Imagen,
-      Latitude: Latitude ?? this.Latitude,
-      Longitude: Longitude ?? this.Longitude,
-      Facebook: Facebook ?? this.Facebook,
-      Twitter: Twitter ?? this.Twitter,
-      Instagram: Instagram ?? this.Instagram,
-      Website: Website ?? this.Website,
-      Creado: Creado ?? this.Creado,
-      Actualizado: Actualizado ?? this.Actualizado,
+      id_Negocio: id_Negocio ?? this.id_Negocio,
+      nombre: nombre ?? this.nombre,
+      password: password ?? this.password,
+      descripcion: descripcion ?? this.descripcion,
+      direccion: direccion ?? this.direccion,
+      telefono: telefono ?? this.telefono,
+      correo: correo ?? this.correo,
+      imagen: imagen ?? this.imagen,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      facebook: facebook ?? this.facebook,
+      twitter: twitter ?? this.twitter,
+      instagram: instagram ?? this.instagram,
+      website: website ?? this.website,
+      creado: creado ?? this.creado,
+      actualizado: actualizado ?? this.actualizado,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'Id_Negocio': Id_Negocio,
-      'Nombre': Nombre,
-      'Descripsion': Descripsion,
-      'Direccion': Direccion,
-      'Telefono': Telefono,
-      'Correo': Correo,
-      'Imagen': Imagen,
-      'Latitude': Latitude,
-      'Longitude': Longitude,
-      'Facebook': Facebook,
-      'Twitter': Twitter,
-      'Instagram': Instagram,
-      'Website': Website,
-      'Creado': Creado,
-      'Actualizado': Actualizado,
+      'id_Negocio': id_Negocio,
+      'nombre': nombre,
+      'password': password,
+      'descripcion': descripcion,
+      'direccion': direccion,
+      'telefono': telefono,
+      'correo': correo,
+      'imagen': imagen,
+      'latitude': latitude,
+      'longitude': longitude,
+      'facebook': facebook,
+      'twitter': twitter,
+      'instagram': instagram,
+      'website': website,
+      'creado': creado?.millisecondsSinceEpoch,
+      'actualizado': actualizado?.millisecondsSinceEpoch,
     };
   }
 
   factory NegocioModel.fromMap(Map<String, dynamic> map) {
     return NegocioModel(
-      Id_Negocio: map['id_Negocio'].toInt() as int,
-      Nombre: map['nombre'] as String,
-      Descripsion: map['descripsion'] as String,
-      Direccion: map['direccion'] as String,
-      Telefono: map['telefono'] as String,
-      Correo: map['correo'] as String,
-      Imagen: map['imagen'] as String,
-      Latitude: map['latitude'].toDouble() as double,
-      Longitude: map['longitude'].toDouble() as double,
-      Facebook: map['facebook'] as String,
-      Twitter: map['twitter'] as String,
-      Instagram: map['instagram'] as String,
-      Website: map['website'] as String,
-      Creado: map['creado'] as String,
-      Actualizado: map['actualizado'] as String,
+      id_Negocio: map['id_Negocio'] != null ? map['id_Negocio'] as int : null,
+      nombre: map['nombre'] as String,
+      password: map['password'] != null ? map['password'] as String : null,
+      descripcion: map['descripcion'] as String,
+      direccion: map['direccion'] as String,
+      telefono: map['telefono'] as String,
+      correo: map['correo'] as String,
+      imagen: map['imagen'] != null ? map['imagen'] as String : null,
+      latitude: map['latitude'] as double,
+      longitude: map['longitude'] as double,
+      facebook: map['facebook'] != null ? map['facebook'] as String : null,
+      twitter: map['twitter'] != null ? map['twitter'] as String : null,
+      instagram: map['instagram'] != null ? map['instagram'] as String : null,
+      website: map['website'] != null ? map['website'] as String : null,
+      creado: map['creado'] != null ? DateTime.parse(map['creado'] as String) : null,
+      actualizado: map['actualizado'] != null ? DateTime.parse(map['actualizado'] as String) : null,
     );
   }
 
@@ -116,7 +123,7 @@ class NegocioModel {
 
   @override
   String toString() {
-    return 'NegocioModel(Id_Negocio: $Id_Negocio, Nombre: $Nombre, Descripsion: $Descripsion, Direccion: $Direccion, Telefono: $Telefono, Correo: $Correo, Imagen: $Imagen, Latitude: $Latitude, Longitude: $Longitude, Facebook: $Facebook, Twitter: $Twitter, Instagram: $Instagram, Website: $Website, Creado: $Creado, Actualizado: $Actualizado)';
+    return 'NegocioModel(id_Negocio: $id_Negocio, nombre: $nombre, password: $password, descripcion: $descripcion, direccion: $direccion, telefono: $telefono, correo: $correo, imagen: $imagen, latitude: $latitude, longitude: $longitude, facebook: $facebook, twitter: $twitter, instagram: $instagram, website: $website, creado: $creado, actualizado: $actualizado)';
   }
 
   @override
@@ -124,39 +131,41 @@ class NegocioModel {
     if (identical(this, other)) return true;
   
     return 
-      other.Id_Negocio == Id_Negocio &&
-      other.Nombre == Nombre &&
-      other.Descripsion == Descripsion &&
-      other.Direccion == Direccion &&
-      other.Telefono == Telefono &&
-      other.Correo == Correo &&
-      other.Imagen == Imagen &&
-      other.Latitude == Latitude &&
-      other.Longitude == Longitude &&
-      other.Facebook == Facebook &&
-      other.Twitter == Twitter &&
-      other.Instagram == Instagram &&
-      other.Website == Website &&
-      other.Creado == Creado &&
-      other.Actualizado == Actualizado;
+      other.id_Negocio == id_Negocio &&
+      other.nombre == nombre &&
+      other.password == password &&
+      other.descripcion == descripcion &&
+      other.direccion == direccion &&
+      other.telefono == telefono &&
+      other.correo == correo &&
+      other.imagen == imagen &&
+      other.latitude == latitude &&
+      other.longitude == longitude &&
+      other.facebook == facebook &&
+      other.twitter == twitter &&
+      other.instagram == instagram &&
+      other.website == website &&
+      other.creado == creado &&
+      other.actualizado == actualizado;
   }
 
   @override
   int get hashCode {
-    return Id_Negocio.hashCode ^
-      Nombre.hashCode ^
-      Descripsion.hashCode ^
-      Direccion.hashCode ^
-      Telefono.hashCode ^
-      Correo.hashCode ^
-      Imagen.hashCode ^
-      Latitude.hashCode ^
-      Longitude.hashCode ^
-      Facebook.hashCode ^
-      Twitter.hashCode ^
-      Instagram.hashCode ^
-      Website.hashCode ^
-      Creado.hashCode ^
-      Actualizado.hashCode;
+    return id_Negocio.hashCode ^
+      nombre.hashCode ^
+      password.hashCode ^
+      descripcion.hashCode ^
+      direccion.hashCode ^
+      telefono.hashCode ^
+      correo.hashCode ^
+      imagen.hashCode ^
+      latitude.hashCode ^
+      longitude.hashCode ^
+      facebook.hashCode ^
+      twitter.hashCode ^
+      instagram.hashCode ^
+      website.hashCode ^
+      creado.hashCode ^
+      actualizado.hashCode;
   }
 }

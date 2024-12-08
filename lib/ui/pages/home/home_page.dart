@@ -73,9 +73,9 @@ class _HomePageState extends State<HomePage> {
               child: ListCardsHome(
                 items: ultimosNegocios
                     .map((e) => ItemCardHome(
-                          titulo: e.Nombre,
-                          imagen: e.Imagen,
-                          path: '/negocio/${e.Id_Negocio}',
+                          titulo: e.nombre,
+                          imagen: e.imagen!,
+                          path: '/negocio/${e.id_Negocio}',
                         ))
                     .toList(),
                 tituloLista: "Nuevos negocios",

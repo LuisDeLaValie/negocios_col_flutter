@@ -91,7 +91,7 @@ class _NegocioPageState extends State<NegocioPage> {
         onPressed: () {
           final Uri tel = Uri(
             scheme: 'tel',
-            path: negocio!.Telefono,
+            path: negocio!.telefono,
           );
           launchUrl(tel);
         },

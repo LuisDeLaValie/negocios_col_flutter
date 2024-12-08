@@ -2,8 +2,6 @@
 import 'package:auto_route/auto_route.dart';
 
 import 'package:flutter/material.dart';
-import 'package:negocios_col_flutter/services/router/router.gr.dart';
-import 'package:negocios_col_flutter/ui/pages/negocios/producto/producto_page.dart';
 import 'package:tdtxle_data_format/extenciones/number_extents.dart';
 
 class ListaProductos extends StatelessWidget {
