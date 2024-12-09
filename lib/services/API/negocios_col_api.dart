@@ -45,6 +45,76 @@ class NegociosColApi {
     }
   }
 
+  Future<ProductoModel> crearProducto(ProductoModel negocio) async {
+    final client = http.Client();
+    try {
+      final uri = Uri.parse('$api/api/productos'); // URL de tu endpoint
+      final request = http.MultipartRequest('POST', uri);
+
+      request.fields['Nombre'] = negocio.nombre;
+      request.fields['Descripcion'] = negocio.descripsion;
+      // request.fields['Imagen'] = negocio.id_Negocio!.toString();
+      request.fields['Precio'] = negocio.precio.toString();
+      request.fields['Unidad'] = negocio.unidad.toString();
+      request.fields['Negocio'] = negocio.id_Negocio.toString();
+
+      // Adjuntar la imagen si existe
+      if (negocio.imagen != null) {
+        final imagenMultipart =
+            await http.MultipartFile.fromPath('Imagen', negocio.imagen!);
+        request.files.add(imagenMultipart);
+      }
+
+// Enviar la solicitud
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      var data = jsonDecode(response.body) as Map<String, dynamic>;
+      if (response.statusCode != 200) throw new Exception(data);
+      return ProductoModel.fromMap(data);
+    } catch (e) {
+      print('Error: $e');
+      rethrow;
+    } finally {
+      client.close();
+    }
+  }
+
+  Future<ServicioModel> crearServicio(ServicioModel negocio) async {
+    final client = http.Client();
+    try {
+      final uri = Uri.parse('$api/api/servicios'); // URL de tu endpoint
+      final request = http.MultipartRequest('POST', uri);
+
+      request.fields['Nombre'] = negocio.nombre;
+      request.fields['Descripcion'] = negocio.descripcion;
+      // request.fields['Imagen'] = negocio.id_Negocio!.toString();
+      request.fields['Precio'] = negocio.precio.toString();
+      request.fields['Unidad'] = negocio.unidad.toString();
+      request.fields['Negocio'] = negocio.id_Negocio.toString();
+
+      // Adjuntar la imagen si existe
+      if (negocio.imagen != null) {
+        final imagenMultipart =
+            await http.MultipartFile.fromPath('Imagen', negocio.imagen!);
+        request.files.add(imagenMultipart);
+      }
+
+// Enviar la solicitud
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      var data = jsonDecode(response.body) as Map<String, dynamic>;
+      if (response.statusCode != 200) throw  Exception(data);
+      return ServicioModel.fromMap(data);
+    } catch (e) {
+      print('Error: $e');
+      rethrow;
+    } finally {
+      client.close();
+    }
+  }
+
   Future<List<ServicioModel>> getLastServicio() async {
     final client = http.Client();
     try {
@@ -171,21 +241,29 @@ class NegociosColApi {
       final uri = Uri.parse('$api/api/negocios'); // URL de tu endpoint
       final request = http.MultipartRequest('POST', uri);
 
-      if (negocio.id_Negocio != null) request.fields['id_Negocio'] = negocio.id_Negocio!.toString();
+      if (negocio.id_Negocio != null)
+        request.fields['id_Negocio'] = negocio.id_Negocio!.toString();
       request.fields['nombre'] = negocio.nombre;
-      if (negocio.password != null) request.fields['password'] = negocio.password!;
+      if (negocio.password != null)
+        request.fields['password'] = negocio.password!;
       request.fields['descripcion'] = negocio.descripcion;
       request.fields['direccion'] = negocio.direccion;
       request.fields['telefono'] = negocio.telefono;
       request.fields['correo'] = negocio.correo;
-      // if (negocio.latitude != null) request.fields['latitude'] = negocio.latitude!.toString();
-      // if (negocio.longitude != null) request.fields['longitude'] = negocio.longitude!.toString();
-      if (negocio.facebook != null) request.fields['facebook'] = negocio.facebook!;
+      if (negocio.latitude != null)
+        request.fields['latitude'] = negocio.latitude!.toString();
+      if (negocio.longitude != null)
+        request.fields['longitude'] = negocio.longitude!.toString();
+      if (negocio.facebook != null)
+        request.fields['facebook'] = negocio.facebook!;
       if (negocio.twitter != null) request.fields['twitter'] = negocio.twitter!;
-      if (negocio.instagram != null) request.fields['instagram'] = negocio.instagram!;
+      if (negocio.instagram != null)
+        request.fields['instagram'] = negocio.instagram!;
       if (negocio.website != null) request.fields['website'] = negocio.website!;
-      if (negocio.creado != null) request.fields['creado'] = negocio.creado!.toIso8601String();
-      if (negocio.actualizado != null) request.fields['actualizado'] = negocio.actualizado!.toIso8601String();
+      if (negocio.creado != null)
+        request.fields['creado'] = negocio.creado!.toIso8601String();
+      if (negocio.actualizado != null)
+        request.fields['actualizado'] = negocio.actualizado!.toIso8601String();
 
       // Adjuntar la imagen si existe
       if (negocio.imagen != null) {
@@ -215,21 +293,27 @@ class NegociosColApi {
       final uri = Uri.parse('$api/api/negocios/$id'); // URL de tu endpoint
       final request = http.MultipartRequest('PUT', uri);
 
-      if (negocio.id_Negocio != null) request.fields['id_Negocio'] = negocio.id_Negocio!.toString();
+      if (negocio.id_Negocio != null)
+        request.fields['id_Negocio'] = negocio.id_Negocio!.toString();
       request.fields['nombre'] = negocio.nombre;
-      if (negocio.password != null) request.fields['password'] = negocio.password!;
+      if (negocio.password != null)
+        request.fields['password'] = negocio.password!;
       request.fields['descripcion'] = negocio.descripcion;
       request.fields['direccion'] = negocio.direccion;
       request.fields['telefono'] = negocio.telefono;
       request.fields['correo'] = negocio.correo;
       // if (negocio.latitude != null) request.fields['latitude'] = negocio.latitude!.toString();
       // if (negocio.longitude != null) request.fields['longitude'] = negocio.longitude!.toString();
-      if (negocio.facebook != null) request.fields['facebook'] = negocio.facebook!;
+      if (negocio.facebook != null)
+        request.fields['facebook'] = negocio.facebook!;
       if (negocio.twitter != null) request.fields['twitter'] = negocio.twitter!;
-      if (negocio.instagram != null) request.fields['instagram'] = negocio.instagram!;
+      if (negocio.instagram != null)
+        request.fields['instagram'] = negocio.instagram!;
       if (negocio.website != null) request.fields['website'] = negocio.website!;
-      if (negocio.creado != null) request.fields['creado'] = negocio.creado!.toIso8601String();
-      if (negocio.actualizado != null) request.fields['actualizado'] = negocio.actualizado!.toIso8601String();
+      if (negocio.creado != null)
+        request.fields['creado'] = negocio.creado!.toIso8601String();
+      if (negocio.actualizado != null)
+        request.fields['actualizado'] = negocio.actualizado!.toIso8601String();
 
       // Adjuntar la imagen si existe
       if (negocio.imagen != null) {

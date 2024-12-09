@@ -2,38 +2,42 @@
 import 'dart:convert';
 
 class ProductoModel {
-  final int id_Producto;
+  final int? id_Producto;
   final int id_Negocio;
+  final int precio;
   final String nombre;
   final String descripsion;
-  final String imagen;
+  final String? imagen;
   final int unidad;
-  final String creado;
-  final String actualizado;
+  final DateTime? creado;
+  final DateTime? actualizado;
   ProductoModel({
-    required this.id_Producto,
+    this.id_Producto,
     required this.id_Negocio,
+    required this.precio,
     required this.nombre,
     required this.descripsion,
-    required this.imagen,
+    this.imagen,
     required this.unidad,
-    required this.creado,
-    required this.actualizado,
+    this.creado,
+    this.actualizado,
   });
 
   ProductoModel copyWith({
     int? id_Producto,
     int? id_Negocio,
+    int? precio,
     String? nombre,
     String? descripsion,
     String? imagen,
     int? unidad,
-    String? creado,
-    String? actualizado,
+    DateTime? creado,
+    DateTime? actualizado,
   }) {
     return ProductoModel(
       id_Producto: id_Producto ?? this.id_Producto,
       id_Negocio: id_Negocio ?? this.id_Negocio,
+      precio: precio ?? this.precio,
       nombre: nombre ?? this.nombre,
       descripsion: descripsion ?? this.descripsion,
       imagen: imagen ?? this.imagen,
@@ -47,25 +51,27 @@ class ProductoModel {
     return <String, dynamic>{
       'id_Producto': id_Producto,
       'id_Negocio': id_Negocio,
+      'precio': precio,
       'nombre': nombre,
       'descripsion': descripsion,
       'imagen': imagen,
       'unidad': unidad,
-      'creado': creado,
-      'actualizado': actualizado,
+      'creado': creado?.millisecondsSinceEpoch,
+      'actualizado': actualizado?.millisecondsSinceEpoch,
     };
   }
 
   factory ProductoModel.fromMap(Map<String, dynamic> map) {
     return ProductoModel(
-      id_Producto: map['id_Producto'] as int,
+      id_Producto: map['id_Producto'] != null ? map['id_Producto'] as int : null,
       id_Negocio: map['id_Negocio'] as int,
+      precio: map['precio'] as int,
       nombre: map['nombre'] as String,
       descripsion: map['descripsion'] as String,
-      imagen: map['imagen'] as String,
+      imagen: map['imagen'] != null ? map['imagen'] as String : null,
       unidad: map['unidad'] as int,
-      creado: map['creado'] as String,
-      actualizado: map['actualizado'] as String,
+      creado: map['creado'] != null ? DateTime.parse(map['creado'] as String) : null,
+      actualizado: map['actualizado'] != null ? DateTime.parse(map['actualizado'] as String) : null,
     );
   }
 
@@ -75,7 +81,7 @@ class ProductoModel {
 
   @override
   String toString() {
-    return 'ProductoModel(id_Producto: $id_Producto, id_Negocio: $id_Negocio, nombre: $nombre, descripsion: $descripsion, imagen: $imagen, unidad: $unidad, creado: $creado, actualizado: $actualizado)';
+    return 'ProductoModel(id_Producto: $id_Producto, id_Negocio: $id_Negocio, precio: $precio, nombre: $nombre, descripsion: $descripsion, imagen: $imagen, unidad: $unidad, creado: $creado, actualizado: $actualizado)';
   }
 
   @override
@@ -85,6 +91,7 @@ class ProductoModel {
     return 
       other.id_Producto == id_Producto &&
       other.id_Negocio == id_Negocio &&
+      other.precio == precio &&
       other.nombre == nombre &&
       other.descripsion == descripsion &&
       other.imagen == imagen &&
@@ -97,6 +104,7 @@ class ProductoModel {
   int get hashCode {
     return id_Producto.hashCode ^
       id_Negocio.hashCode ^
+      precio.hashCode ^
       nombre.hashCode ^
       descripsion.hashCode ^
       imagen.hashCode ^
@@ -104,4 +112,4 @@ class ProductoModel {
       creado.hashCode ^
       actualizado.hashCode;
   }
-  }
+}

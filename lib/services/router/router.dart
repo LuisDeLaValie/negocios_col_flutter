@@ -20,12 +20,12 @@ class AppRouter extends RootStackRouter {
           path: '/editar/negocio/:negocio',
           guards: [AuthGuard()],
         ),
-       
+
         AutoRoute(
           page: CrearNegocioRoute.page,
           path: '/crear/negocio',
         ),
-       
+
         AutoRoute(
           page: LoginNegocio.page,
           path: '/negocio/login',
@@ -46,6 +46,14 @@ class AppRouter extends RootStackRouter {
             AutoRoute(
               page: ProductoRoute.page,
               path: 'producto/:id',
+            ),
+            AutoRoute(
+              page: ListarRoute.page,
+              path: 'listar',
+            ),
+            AutoRoute(
+              page: AgregarRoute.page,
+              path: 'listar/agregar/:tipo',
             ),
           ],
         ),

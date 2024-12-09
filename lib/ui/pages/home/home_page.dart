@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                         path:
                             '/negocio/${e.id_Negocio}/producto/${e.id_Producto}',
                         // path: '/negocio/${e.id_Negocio}/producto/${e.id_Producto}',
-                        imagen: e.imagen))
+                        imagen: e.imagen!))
                     .toList(),
                 tituloLista: "Mas Buscados",
               ),

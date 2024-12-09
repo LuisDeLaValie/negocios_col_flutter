@@ -2,28 +2,31 @@
 import 'dart:convert';
 
 class ServicioModel {
-  final int id_servicio;
+  final int? id_servicio;
   final int id_Negocio;
+  final int precio;
   final String nombre;
   final String descripcion;
   final String imagen;
   final int unidad;
-  final String creado;
-  final String actualizado;
+  final String? creado;
+  final String? actualizado;
   ServicioModel({
-    required this.id_servicio,
+    this.id_servicio,
     required this.id_Negocio,
+    required this.precio,
     required this.nombre,
     required this.descripcion,
     required this.imagen,
     required this.unidad,
-    required this.creado,
-    required this.actualizado,
+    this.creado,
+    this.actualizado,
   });
 
   ServicioModel copyWith({
     int? id_servicio,
     int? id_Negocio,
+    int? precio,
     String? nombre,
     String? descripcion,
     String? imagen,
@@ -34,6 +37,7 @@ class ServicioModel {
     return ServicioModel(
       id_servicio: id_servicio ?? this.id_servicio,
       id_Negocio: id_Negocio ?? this.id_Negocio,
+      precio: precio ?? this.precio,
       nombre: nombre ?? this.nombre,
       descripcion: descripcion ?? this.descripcion,
       imagen: imagen ?? this.imagen,
@@ -47,6 +51,7 @@ class ServicioModel {
     return <String, dynamic>{
       'id_servicio': id_servicio,
       'id_Negocio': id_Negocio,
+      'precio': precio,
       'nombre': nombre,
       'descripcion': descripcion,
       'imagen': imagen,
@@ -58,14 +63,15 @@ class ServicioModel {
 
   factory ServicioModel.fromMap(Map<String, dynamic> map) {
     return ServicioModel(
-      id_servicio: map['id_servicio'] as int,
+      id_servicio: map['id_servicio'] != null ? map['id_servicio'] as int : null,
       id_Negocio: map['id_Negocio'] as int,
+      precio: map['precio'] as int,
       nombre: map['nombre'] as String,
       descripcion: map['descripcion'] as String,
       imagen: map['imagen'] as String,
       unidad: map['unidad'] as int,
-      creado: map['creado'] as String,
-      actualizado: map['actualizado'] as String,
+      creado: map['creado'] != null ? map['creado'] as String : null,
+      actualizado: map['actualizado'] != null ? map['actualizado'] as String : null,
     );
   }
 
@@ -75,7 +81,7 @@ class ServicioModel {
 
   @override
   String toString() {
-    return 'ServicioModel(id_servicio: $id_servicio, id_Negocio: $id_Negocio, nombre: $nombre, descripcion: $descripcion, imagen: $imagen, unidad: $unidad, creado: $creado, actualizado: $actualizado)';
+    return 'ServicioModel(id_servicio: $id_servicio, id_Negocio: $id_Negocio, precio: $precio, nombre: $nombre, descripcion: $descripcion, imagen: $imagen, unidad: $unidad, creado: $creado, actualizado: $actualizado)';
   }
 
   @override
@@ -85,6 +91,7 @@ class ServicioModel {
     return 
       other.id_servicio == id_servicio &&
       other.id_Negocio == id_Negocio &&
+      other.precio == precio &&
       other.nombre == nombre &&
       other.descripcion == descripcion &&
       other.imagen == imagen &&
@@ -97,6 +104,7 @@ class ServicioModel {
   int get hashCode {
     return id_servicio.hashCode ^
       id_Negocio.hashCode ^
+      precio.hashCode ^
       nombre.hashCode ^
       descripcion.hashCode ^
       imagen.hashCode ^
@@ -104,4 +112,4 @@ class ServicioModel {
       creado.hashCode ^
       actualizado.hashCode;
   }
-  }
+}

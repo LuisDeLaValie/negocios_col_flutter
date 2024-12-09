@@ -75,11 +75,11 @@ class _NegocioPageState extends State<NegocioPage> {
                   productos: productos!
                       .map(
                         (e) => ItemProducto(
-                            id: e.id_Producto,
+                            id: e.id_Producto!,
                             titulo: e.nombre,
                             detalle: e.descripsion,
                             precio: 25.4,
-                            imagen: e.imagen),
+                            imagen: e.imagen!),
                       )
                       .toList(),
                 ),

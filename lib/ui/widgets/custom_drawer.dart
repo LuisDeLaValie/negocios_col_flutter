@@ -16,13 +16,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
   void initState() {
     var boxSesion = Hive.box('Sesion');
     final idSesion = boxSesion.get('id_sesion');
-    NegociosColApi().getNegocio(idSesion).then(
-      (value) {
-        setState(() {
-          negocio = value;
-        });
-      },
-    );
+    if (idSesion != null) {
+      NegociosColApi().getNegocio(idSesion).then(
+        (value) {
+          setState(() {
+            negocio = value;
+          });
+        },
+      );
+    }
     super.initState();
   }
 
@@ -34,23 +36,23 @@ class _CustomDrawerState extends State<CustomDrawer> {
       child: Column(
         children: [
           Header(
-            imagen: negocio?.imagen ?? "",
-            nombre: negocio?.nombre ?? "",
+            imagen: negocio?.imagen,
+            nombre: negocio?.nombre,
           ),
           Expanded(
             child: ListView(
               children: [
                 ListTile(
-                  leading: Icon(Icons.home),
-                  title: Text('Home'),
+                  leading: const Icon(Icons.home),
+                  title: const Text('Home'),
                   onTap: () {
                     // Navigate to Home page
                     context.router.pushNamed('/');
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.account_balance_wallet),
-                  title: Text('Negocio'),
+                  leading: const Icon(Icons.account_balance_wallet),
+                  title: const Text('Negocio'),
                   onTap: () {
                     var boxSesion = Hive.box('Sesion');
                     // Navigate to Account page
@@ -59,11 +61,22 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.email),
-                  title: Text('Contactos'),
+                  leading: const Icon(Icons.card_membership_sharp),
+                  title: const Text('Productos y Servicios'),
                   onTap: () {
                     // Navigate to Contact page
                     //Navigator.push(context, MaterialPageRoute(builder: (context) => ContactPage()));
+                    var boxSesion = Hive.box('Sesion');
+                    if (boxSesion.get('id_sesion') != null) {
+                      context.router.pushNamed(
+                          '/negocio/${boxSesion.get('id_sesion')}/listar');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("No puedes entrar en este modulo"),
+                        ),
+                      );
+                    }
                   },
                 ),
               ],
@@ -107,11 +120,8 @@ class Header extends StatelessWidget {
             const SizedBox(
               width: double.infinity,
               height: double.infinity,
-              child: Icon(
-                Icons.contact_emergency_sharp,
-                size: 100,
-                color: Colors.grey
-              ),
+              child: Icon(Icons.contact_emergency_sharp,
+                  size: 100, color: Colors.grey),
             ),
           Positioned(
             bottom: 5,
