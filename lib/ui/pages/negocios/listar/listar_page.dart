@@ -71,7 +71,7 @@ class _ListarPageState extends State<ListarPage> {
                             id: e.id_Producto!,
                             titulo: e.nombre,
                             detalle: e.descripsion,
-                            precio: 25.4,
+                            precio: e.precio.toDouble(),
                             imagen: e.imagen!),
                       )
                       .toList() ??
@@ -84,8 +84,8 @@ class _ListarPageState extends State<ListarPage> {
                             id: e.id_servicio!,
                             titulo: e.nombre,
                             detalle: e.descripcion,
-                            precio: 25.4,
-                            imagen: e.imagen),
+                            precio: e.precio.toDouble(),
+                            imagen: e.imagen!),
                       )
                       .toList() ??
                   [],

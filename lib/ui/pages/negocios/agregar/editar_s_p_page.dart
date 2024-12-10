@@ -6,20 +6,52 @@ import 'package:negocios_col_flutter/services/API/negocios_col_api.dart';
 import 'package:tdtxle_inputs_flutter/inputs/imagen_perfil/imagen_perfil.dart';
 
 @RoutePage()
-class AgregarPage extends StatefulWidget {
+class EditarSPPage extends StatefulWidget {
   final int idNegocio;
   final String tipo;
-  const AgregarPage({
+  final int id;
+  const EditarSPPage({
     super.key,
     @PathParam.inherit('negocio') required this.idNegocio,
     @PathParam('tipo') required this.tipo,
+    @PathParam('id') required this.id,
   });
 
   @override
-  State<AgregarPage> createState() => _AgregarPageState();
+  State<EditarSPPage> createState() => _EditarSPPageState();
 }
 
-class _AgregarPageState extends State<AgregarPage> {
+class _EditarSPPageState extends State<EditarSPPage> {
+  ProductoModel? produto;
+  ServicioModel? servicio;
+
+  @override
+  void initState() {
+    if (widget.tipo == "producto") {
+      NegociosColApi().getProducto(widget.id).then((value) {
+        nombre.text = value.nombre;
+        unidad.text = value.unidad.toString();
+        detalles.text = value.descripsion;
+        precio.text = value.precio.toString();
+        setState(() {
+          produto = value;
+        });
+      });
+    } else {
+      NegociosColApi().getServicio(widget.id).then((value) {
+        nombre.text = value.nombre;
+        unidad.text = value.unidad.toString();
+        detalles.text = value.descripcion;
+        precio.text = value.precio.toString();
+        setState(() {
+          servicio = value;
+        });
+      });
+    }
+
+    super.initState();
+  }
+
   String? imagen;
   TextEditingController nombre = TextEditingController();
   TextEditingController unidad = TextEditingController();
@@ -28,6 +60,9 @@ class _AgregarPageState extends State<AgregarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final String laImagen = imagen ?? produto?.imagen ?? servicio?.imagen ?? "";
+
+    print("imagen a mostrar $laImagen");
     return Scaffold(
         appBar: AppBar(),
         body: Padding(
@@ -37,7 +72,7 @@ class _AgregarPageState extends State<AgregarPage> {
               children: [
                 const SizedBox(height: 20),
                 Text(
-                  "Agregar ${widget.tipo}",
+                  "Editar ${widget.tipo}",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
@@ -45,7 +80,7 @@ class _AgregarPageState extends State<AgregarPage> {
                 Container(
                   constraints: const BoxConstraints(maxHeight: 200),
                   child: ImagenPerfilFormFile(
-                    initialValue: imagen ?? "",
+                    initialValue: laImagen,
                     onChanged: (p0) {
                       setState(() {
                         imagen = p0!.path;
@@ -103,26 +138,26 @@ class _AgregarPageState extends State<AgregarPage> {
     if (widget.tipo == "producto") {
       final producto = ProductoModel(
         nombre: nombre.text,
-        imagen: imagen!,
+        imagen: imagen,
         precio: int.parse(precio.text),
         descripsion: detalles.text,
         id_Negocio: widget.idNegocio,
         unidad: int.parse(unidad.text),
       );
 
-      final res = await NegociosColApi().crearProducto(producto);
+      final res =   await NegociosColApi().editarProducto(widget.id, producto);
       context.router.back();
     } else {
       final sevicio = ServicioModel(
         nombre: nombre.text,
-        imagen: imagen!,
+        imagen: imagen,
         precio: int.parse(precio.text),
         descripcion: detalles.text,
         id_Negocio: widget.idNegocio,
         unidad: 1,
       );
 
-      final res = await NegociosColApi().crearServicio(sevicio);
+      final res = await NegociosColApi().editarServicio(widget.id, sevicio);
       context.router.back();
     }
   }

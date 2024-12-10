@@ -105,7 +105,77 @@ class NegociosColApi {
       final response = await http.Response.fromStream(streamedResponse);
 
       var data = jsonDecode(response.body) as Map<String, dynamic>;
-      if (response.statusCode != 200) throw  Exception(data);
+      if (response.statusCode != 200) throw Exception(data);
+      return ServicioModel.fromMap(data);
+    } catch (e) {
+      print('Error: $e');
+      rethrow;
+    } finally {
+      client.close();
+    }
+  }
+
+  Future<ProductoModel> editarProducto(int id, ProductoModel negocio) async {
+    final client = http.Client();
+    try {
+      final uri = Uri.parse('$api/api/productos/$id'); // URL de tu endpoint
+      final request = http.MultipartRequest('PUT', uri);
+
+      request.fields['Nombre'] = negocio.nombre;
+      request.fields['Descripcion'] = negocio.descripsion;
+      // request.fields['Imagen'] = negocio.id_Negocio!.toString();
+      request.fields['Precio'] = negocio.precio.toString();
+      request.fields['Unidad'] = negocio.unidad.toString();
+      request.fields['Negocio'] = negocio.id_Negocio.toString();
+
+      // Adjuntar la imagen si existe
+      if (negocio.imagen != null) {
+        final imagenMultipart =
+            await http.MultipartFile.fromPath('Imagen', negocio.imagen!);
+        request.files.add(imagenMultipart);
+      }
+
+// Enviar la solicitud
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      var data = jsonDecode(response.body) as Map<String, dynamic>;
+      if (response.statusCode != 200) throw new Exception(data);
+      return ProductoModel.fromMap(data);
+    } catch (e) {
+      print('Error: $e');
+      rethrow;
+    } finally {
+      client.close();
+    }
+  }
+
+  Future<ServicioModel> editarServicio(int id, ServicioModel negocio) async {
+    final client = http.Client();
+    try {
+      final uri = Uri.parse('$api/api/servicios/$id'); // URL de tu endpoint
+      final request = http.MultipartRequest('PUT', uri);
+
+      request.fields['Nombre'] = negocio.nombre;
+      request.fields['Descripcion'] = negocio.descripcion;
+      // request.fields['Imagen'] = negocio.id_Negocio!.toString();
+      request.fields['Precio'] = negocio.precio.toString();
+      request.fields['Unidad'] = negocio.unidad.toString();
+      request.fields['Negocio'] = negocio.id_Negocio.toString();
+
+      // Adjuntar la imagen si existe
+      if (negocio.imagen != null) {
+        final imagenMultipart =
+            await http.MultipartFile.fromPath('Imagen', negocio.imagen!);
+        request.files.add(imagenMultipart);
+      }
+
+// Enviar la solicitud
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      var data = jsonDecode(response.body) as Map<String, dynamic>;
+      if (response.statusCode != 200) throw Exception(data);
       return ServicioModel.fromMap(data);
     } catch (e) {
       print('Error: $e');

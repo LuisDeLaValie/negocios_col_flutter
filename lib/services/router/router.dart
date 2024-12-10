@@ -55,6 +55,10 @@ class AppRouter extends RootStackRouter {
               page: AgregarRoute.page,
               path: 'listar/agregar/:tipo',
             ),
+            AutoRoute(
+              page: EditarSPRoute.page,
+              path: 'listar/:tipo/:id',
+            ),
           ],
         ),
 

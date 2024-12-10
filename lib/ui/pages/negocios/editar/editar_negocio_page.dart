@@ -62,14 +62,16 @@ class _EditarNegocioPageState extends State<EditarNegocioPage> {
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 const SizedBox(height: 20),
-                
-                ImagenPerfilFormFile(
-                  initialValue: imagen ?? negocio?.imagen ?? "",
-                  onChanged: (p0) {
-                    setState(() {
-                      imagen = p0!.path;
-                    });
-                  },
+                Container(
+                  constraints: const BoxConstraints(maxHeight: 200),
+                  child: ImagenPerfilFormFile(
+                    initialValue: imagen ?? negocio?.imagen ?? "",
+                    onChanged: (p0) {
+                      setState(() {
+                        imagen = p0!.path;
+                      });
+                    },
+                  ),
                 ),
                 TextFormField(
                   controller: nombre,

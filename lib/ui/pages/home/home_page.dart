@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                 items: ultimosServicios
                     .map((e) => ItemCardHome(
                           titulo: e.nombre,
-                          imagen: e.imagen,
+                          imagen: e.imagen!,
                           path:
                               '/negocio/${e.id_Negocio}/servicio/${e.id_servicio}',
                         ))

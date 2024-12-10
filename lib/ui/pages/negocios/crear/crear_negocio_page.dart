@@ -41,13 +41,16 @@ class _CrearNegocioPageState extends State<CrearNegocioPage> {
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 const SizedBox(height: 20),
-                ImagenPerfilFormFile(
-                  initialValue: imagen ?? "",
-                  onChanged: (p0) {
-                    setState(() {
-                      imagen = p0!.path;
-                    });
-                  },
+                Container(
+                  constraints: const BoxConstraints(maxHeight: 200),
+                  child: ImagenPerfilFormFile(
+                    initialValue: imagen ?? "",
+                    onChanged: (p0) {
+                      setState(() {
+                        imagen = p0!.path;
+                      });
+                    },
+                  ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(

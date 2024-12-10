@@ -9,6 +9,7 @@ import 'package:negocios_col_flutter/ui/pages/negocios/widget/lista_productos.da
 import 'package:url_launcher/url_launcher.dart';
 
 import 'widget/header_negocios.dart';
+import 'widget/lista_servicios.dart';
 
 @RoutePage()
 class NegocioPage extends StatefulWidget {
@@ -72,16 +73,33 @@ class _NegocioPageState extends State<NegocioPage> {
             if (productos != null)
               Expanded(
                 child: ListaProductos(
-                  productos: productos!
-                      .map(
-                        (e) => ItemProducto(
-                            id: e.id_Producto!,
-                            titulo: e.nombre,
-                            detalle: e.descripsion,
-                            precio: 25.4,
-                            imagen: e.imagen!),
-                      )
-                      .toList(),
+                  productos: productos
+                          ?.map(
+                            (e) => ItemProducto(
+                                id: e.id_Producto!,
+                                titulo: e.nombre,
+                                detalle: e.descripsion,
+                                precio: e.precio.toDouble(),
+                                imagen: e.imagen!),
+                          )
+                          .toList() ??
+                      [],
+                ),
+              ),
+            if (productos != null)
+              Expanded(
+                child: ListaServicios(
+                  productos: servicios
+                          ?.map(
+                            (e) => ItemServicio(
+                                id: e.id_servicio!,
+                                titulo: e.nombre,
+                                detalle: e.descripcion,
+                                precio: e.precio.toDouble(),
+                                imagen: e.imagen!),
+                          )
+                          .toList() ??
+                      [],
                 ),
               ),
           ],

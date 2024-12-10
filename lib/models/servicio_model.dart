@@ -7,7 +7,7 @@ class ServicioModel {
   final int precio;
   final String nombre;
   final String descripcion;
-  final String imagen;
+  final String? imagen;
   final int unidad;
   final String? creado;
   final String? actualizado;
@@ -17,7 +17,7 @@ class ServicioModel {
     required this.precio,
     required this.nombre,
     required this.descripcion,
-    required this.imagen,
+    this.imagen,
     required this.unidad,
     this.creado,
     this.actualizado,
@@ -63,21 +63,24 @@ class ServicioModel {
 
   factory ServicioModel.fromMap(Map<String, dynamic> map) {
     return ServicioModel(
-      id_servicio: map['id_servicio'] != null ? map['id_servicio'] as int : null,
+      id_servicio:
+          map['id_servicio'] != null ? map['id_servicio'] as int : null,
       id_Negocio: map['id_Negocio'] as int,
       precio: map['precio'] as int,
       nombre: map['nombre'] as String,
       descripcion: map['descripcion'] as String,
-      imagen: map['imagen'] as String,
+      imagen: map['imagen'] != null ? map['imagen'] as String : null,
       unidad: map['unidad'] as int,
       creado: map['creado'] != null ? map['creado'] as String : null,
-      actualizado: map['actualizado'] != null ? map['actualizado'] as String : null,
+      actualizado:
+          map['actualizado'] != null ? map['actualizado'] as String : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ServicioModel.fromJson(String source) => ServicioModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ServicioModel.fromJson(String source) =>
+      ServicioModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -87,29 +90,28 @@ class ServicioModel {
   @override
   bool operator ==(covariant ServicioModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id_servicio == id_servicio &&
-      other.id_Negocio == id_Negocio &&
-      other.precio == precio &&
-      other.nombre == nombre &&
-      other.descripcion == descripcion &&
-      other.imagen == imagen &&
-      other.unidad == unidad &&
-      other.creado == creado &&
-      other.actualizado == actualizado;
+
+    return other.id_servicio == id_servicio &&
+        other.id_Negocio == id_Negocio &&
+        other.precio == precio &&
+        other.nombre == nombre &&
+        other.descripcion == descripcion &&
+        other.imagen == imagen &&
+        other.unidad == unidad &&
+        other.creado == creado &&
+        other.actualizado == actualizado;
   }
 
   @override
   int get hashCode {
     return id_servicio.hashCode ^
-      id_Negocio.hashCode ^
-      precio.hashCode ^
-      nombre.hashCode ^
-      descripcion.hashCode ^
-      imagen.hashCode ^
-      unidad.hashCode ^
-      creado.hashCode ^
-      actualizado.hashCode;
+        id_Negocio.hashCode ^
+        precio.hashCode ^
+        nombre.hashCode ^
+        descripcion.hashCode ^
+        imagen.hashCode ^
+        unidad.hashCode ^
+        creado.hashCode ^
+        actualizado.hashCode;
   }
 }
